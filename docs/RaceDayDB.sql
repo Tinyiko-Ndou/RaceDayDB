@@ -332,12 +332,12 @@ VALUES
  'Category for younger participants.');
 GO
 INSERT INTO EventCategories
-(EventID, CategoryID, EntryFee, MaxParticipants)
+  (EventID, CategoryID, EntryFee, MaxParticipants)
 VALUES
-(1, 5, 600.00, 25000),
-(2, 6, 500.00, 35000),
-(3, 4, 400.00, 15000),
-(3, 3, 300.00, 10000),
+ (1, 5, 600.00, 25000),
+ (2, 6, 500.00, 35000),
+ (3, 4, 400.00, 15000),
+ (3, 3, 300.00, 10000),
 (4, 3, 350.00, 12000),
 (5, 1, 0.00, 3000),
 (5, 9, 0.00, 500),
