@@ -27,7 +27,7 @@ Create Table Users
     Role VARCHAR(20) NOT NULL,
 
     CONSTRAINT CK_Users_Role
-         Check (Role IN ('Participant', 'Organiser', 'Admin'))
+         Check (Role IN ('Participant', 'Organiser'))
 );
 GO
 
