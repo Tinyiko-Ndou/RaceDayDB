@@ -302,10 +302,10 @@ GO
  'Open');
 GO
 INSERT INTO Categories
-(CategoryName, Description)
+  (CategoryName, Description)
 VALUES
-('5 KM Run',
- 'Five kilometre community running event.'),
+  ('5 KM Run',
+  'Five kilometre community running event.'),
 
 ('10 KM Run',
  'Ten kilometre road running category.'),
