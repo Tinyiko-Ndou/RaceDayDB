@@ -55,11 +55,11 @@ Create Table Events
 );
 GO
 
-Create Table Categories
-(
-     CategoryID INT Identity (1,1) Primary Key,
-     CategoryName VARCHAR(100) NOT NULL UNIQUE,
-     Description VARCHAR(500)
+ Create Table Categories
+ (
+      CategoryID INT Identity (1,1) Primary Key,
+      CategoryName VARCHAR(100) NOT NULL UNIQUE,
+      Description VARCHAR(500)
 );
 GO
 
