@@ -92,12 +92,12 @@ GO
 
  Create Table Enrolments
  (
-     EnrolmentID INT Identity (1,1) Primary Key,
-     EventID INT NOT NULL,
-     UserID INT NOT NULL,
-     EventCategoryID INT NOT NULL,
-     EnrolmentDate DATETIME NOT NULL DEFAULT GETDATE(),
-     Status VARCHAR(30) NOT NULL DEFAULT 'Registered',
+      EnrolmentID INT Identity (1,1) Primary Key,
+      EventID INT NOT NULL,
+      UserID INT NOT NULL,
+      EventCategoryID INT NOT NULL,
+      EnrolmentDate DATETIME NOT NULL DEFAULT GETDATE(),
+      Status VARCHAR(30) NOT NULL DEFAULT 'Registered',
 
      CONSTRAINT FK_Enrolments_Events
         FOREIGN KEY (EventID)
