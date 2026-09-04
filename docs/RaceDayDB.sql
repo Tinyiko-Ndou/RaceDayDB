@@ -385,8 +385,8 @@ VALUES
 GO
 
 UPDATE Enrolments
-SET Status = 'Completed'
-WHERE EnrolmentID IN
+ SET Status = 'Completed'
+  WHERE EnrolmentID IN
 (
     11,
     12
