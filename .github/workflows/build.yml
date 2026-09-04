@@ -16,7 +16,7 @@ jobs:
         run: |
           test -f README.md
           test -f docs/RaceDay_ERD.pdf
-          test -f docs/ApiEndpoint_Plan.pdf
+          test -f docs/ApiEndpoint.pdf
           test -f docs/RaceDayDB.sql
 
       - name: Validate SQL script
