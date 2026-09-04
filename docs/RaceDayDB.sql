@@ -166,14 +166,14 @@ GO
 
 Create Table Weather
 (
-      WeatherID INT Identity(1,1) Primary Key,
-      EventID INT NOT NULL,
-      RecordedAt DATETIME NOT NULL DEFAULT GETDATE(),
-      TemperatureC Decimal(5,2),
-      FeelsLikeC Decimal(5,2),
-      Humidity INT,
-      WindSpeedKPH Decimal(6,2),
-      Conditions VARCHAR(100),
+       WeatherID INT Identity(1,1) Primary Key,
+       EventID INT NOT NULL,
+       RecordedAt DATETIME NOT NULL DEFAULT GETDATE(),
+       TemperatureC Decimal(5,2),
+       FeelsLikeC Decimal(5,2),
+       Humidity INT,
+       WindSpeedKPH Decimal(6,2),
+       Conditions VARCHAR(100),
 
       CONSTRAINT FK_Weather_Events
           FOREIGN KEY (EventID)
