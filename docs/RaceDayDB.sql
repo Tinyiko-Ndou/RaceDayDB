@@ -202,8 +202,7 @@ VALUES
 ('Megan', 'Jacobs', 'megan.jacobs@email.com', 'HASH010', '0711223344', 'Participant'),
 ('Sibusiso', 'Mkhize', 'sibusiso@raceday.co.za', 'HASH011', '0722334455', 'Organiser'),
 ('Candice', 'Williams', 'candice@raceday.co.za', 'HASH012', '0733445566', 'Organiser'),
-('Lunga', 'Mabena', 'lunga@raceday.co.za', 'HASH013', '0744556677', 'Organiser'),
-('RaceDay', 'Administrator', 'admin@raceday.co.za', 'HASH014', '0755667788', 'Admin');
+('Lunga', 'Mabena', 'lunga@raceday.co.za', 'HASH013', '0744556677', 'Organiser');
 GO
 
 
