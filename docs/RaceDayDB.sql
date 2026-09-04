@@ -408,12 +408,12 @@ GO
 
 INSERT INTO Routes
 (
-    EventID,
-    DistanceKM,
-    ElevationGainM,
-    StartLocation,
-    FinishLocation,
-    RouteDescription,
+     EventID,
+     DistanceKM,
+     ElevationGainM,
+     StartLocation,
+      FinishLocation,
+     RouteDescription,
     MapURL
 )
 VALUES
