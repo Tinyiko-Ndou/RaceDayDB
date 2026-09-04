@@ -395,11 +395,11 @@ GO
 
 INSERT INTO Results
 (
-    EnrolmentID,
-    FinishTime,
-    Position,
-    Pace,
-    ResultStatus
+     EnrolmentID,
+     FinishTime,
+     Position,
+     Pace,
+     ResultStatus
 )
 VALUES
 (11, '00:24:35', 1, '04:55 min/km', 'Finished'),
