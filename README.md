@@ -50,3 +50,6 @@ The API Endpoint Plan can be found in:
 
 `/docs/RaceDay_API_Endpoint_Plan.docx`
 
+## CI/CD Pipeline
+![CI/CD Build](docs/ci-cd-build.png)
+
