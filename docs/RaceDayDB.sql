@@ -33,17 +33,17 @@ GO
 
 Create Table Events 
 (
-    EventID INT Identity (1,1) Primary Key,
-    OrganiserID INT NOT NULL,
-    EventName VARCHAR(150) NOT NULL,
-    Description VARCHAR(1000),
-    EventType VARCHAR(50) NOT NULL,
-    EventDate DATE NOT NULL,
-    StartTime TIME,
-    Location VARCHAR(100),
-    City VARCHAR(100),
-    Province VARCHAR(100),
-    Status VARCHAR(30) NOT NULL DEFAULT 'Upcoming',
+     EventID INT Identity (1,1) Primary Key,
+     OrganiserID INT NOT NULL,
+     EventName VARCHAR(150) NOT NULL,
+     Description VARCHAR(1000),
+     EventType VARCHAR(50) NOT NULL,
+     EventDate DATE NOT NULL,
+     StartTime TIME,
+     Location VARCHAR(100),
+     City VARCHAR(100),
+     Province VARCHAR(100),
+     Status VARCHAR(30) NOT NULL DEFAULT 'Upcoming',
 
     CONSTRAINT FK_Events_Users
       FOREIGN KEY (OrganiserID)
