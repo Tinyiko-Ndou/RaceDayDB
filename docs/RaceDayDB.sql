@@ -206,13 +206,13 @@ VALUES
 GO
 
 
-INSERT INTO Events
-    (OrganiserID, EventName, Description, EventType, EventDate,
-     StartTime, Location, City, Province, Status)
-VALUES
-(11,
- 'Comrades Road Run',
- 'An ultra-distance road running event between Pietermaritzburg and Durban.',
+ INSERT INTO Events
+     (OrganiserID, EventName, Description, EventType, EventDate,
+      StartTime, Location, City, Province, Status)
+ VALUES
+ (11,
+  'Comrades Road Run',
+  'An ultra-distance road running event between Pietermaritzburg and Durban.',
  'Road Running',
  '2027-05-30',
  '05:30:00',
