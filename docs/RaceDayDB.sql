@@ -122,12 +122,12 @@ GO
 
 Create Table Results
 ( 
-     ResultID INT Identity(1,1) Primary Key,
-     EnrolmentID INT NOT NULL,
-     FinishTime TIME NOT NULL,
-     Position INT,
-     Pace VARCHAR(20),
-     ResultStatus VARCHAR(30) DEFAULT 'Finished',
+      ResultID INT Identity(1,1) Primary Key,
+      EnrolmentID INT NOT NULL,
+      FinishTime TIME NOT NULL,
+      Position INT,
+      Pace VARCHAR(20),
+      ResultStatus VARCHAR(30) DEFAULT 'Finished',
 
      CONSTRAINT FK_Results_Enrolments
         FOREIGN KEY (EnrolmentID)
