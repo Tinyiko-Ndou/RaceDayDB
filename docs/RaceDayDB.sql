@@ -65,11 +65,11 @@ GO
 
 Create Table EventCategories
 (
-     EventCategoryID INT Identity(1,1) Primary Key,
-     EventID INT NOT NULL,
-     CategoryID INT NOT NULL,
-     EntryFee DECIMAL(10,2) DEFAULT 0,
-     MaxParticipants INT,
+      EventCategoryID INT Identity(1,1) Primary Key,
+      EventID INT NOT NULL,
+      CategoryID INT NOT NULL,
+      EntryFee DECIMAL(10,2) DEFAULT 0,
+      MaxParticipants INT,
 
      CONSTRAINT FK_EventCategories_Events
        FOREIGN KEY (EventID)
