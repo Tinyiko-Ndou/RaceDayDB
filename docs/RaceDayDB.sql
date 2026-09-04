@@ -143,14 +143,14 @@ GO
 
 Create Table Routes 
 (
-      RouteID INT Identity(1,1) Primary Key,
-      EventID INT NOT NULL,
-      DistanceKM Decimal(6,2) NOT NULL,
-      ElevationGainM INT,
-      StartLocation VARCHAR(200),
-      FinishLocation VARCHAR(200),
-      RouteDescription VARCHAR(1000),
-      MapURL VARCHAR(500),
+       RouteID INT Identity(1,1) Primary Key,
+       EventID INT NOT NULL,
+       DistanceKM Decimal(6,2) NOT NULL,
+       ElevationGainM INT,
+       StartLocation VARCHAR(200),
+       FinishLocation VARCHAR(200),
+       RouteDescription VARCHAR(1000),
+       MapURL VARCHAR(500),
 
       CONSTRAINT FK_Routes_Events
          FOREIGN KEY(EventID)
