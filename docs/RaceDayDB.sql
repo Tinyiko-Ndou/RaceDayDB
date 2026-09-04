@@ -350,9 +350,9 @@ VALUES
 GO
 INSERT INTO Enrolments
 (
-    EventID,
-    UserID,
-    EventCategoryID,
+     EventID,
+      UserID,
+     EventCategoryID,
     EnrolmentDate,
     Status
 )
