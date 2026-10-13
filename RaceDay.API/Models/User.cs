@@ -30,11 +30,11 @@ namespace RaceDay.API.Models
         [MaxLength(20)]
         public string Role {  get; set; } = string.Empty;
 
-       // public ICollection<EventArgs> OrganisedEvents {  get; set; }
-       // = new List<EventArgs>();
+        public ICollection<Event> OrganisedEvents {  get; set; }
+        = new List<Event>();
 
-      //  public ICollection<Enrolment> Enrolments { get; set; }
-       // = new List<Enrolment>();
+       public ICollection<Enrolment> Enrolments { get; set; }
+        = new List<Enrolment>();
 
 
     }
