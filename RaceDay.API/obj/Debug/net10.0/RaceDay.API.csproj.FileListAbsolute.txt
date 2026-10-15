@@ -167,3 +167,5 @@ C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.API\obj\Debug\net10.0
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.API\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.API\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.API\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.API\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.API\bin\Debug\net10.0\Microsoft.Bcl.Cryptography.dll
