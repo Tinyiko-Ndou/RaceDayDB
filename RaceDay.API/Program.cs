@@ -15,7 +15,7 @@ namespace RaceDay.API
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+            // Learn more about configuring OpenAPI at 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
