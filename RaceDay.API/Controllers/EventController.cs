@@ -6,6 +6,7 @@ using RaceDay.API.Data;
 
 namespace RaceDay.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EventController :ControllerBase
