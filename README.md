@@ -197,4 +197,7 @@ Tests should cover:
 - Category management.
 - Enrolment and duplicate enrolment.
 - Result recording and participant result access.
-- 
+
+- ## CI/CD Pipeline
+![CI/CD Build](docs/CI-CD-Part2)
+
