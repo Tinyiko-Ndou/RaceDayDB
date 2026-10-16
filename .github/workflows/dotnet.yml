@@ -1,0 +1,51 @@
+name: RaceDay API CI
+
+on:
+  push:
+    branches:
+      - main
+      - part-2-api
+  pull_request:
+    branches:
+      - main
+      - part-2-api
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Locate solution
+        id: solution
+        shell: bash
+        run: |
+          solution=$(find . -maxdepth 4 \
+            \( -name '*.sln' -o -name '*.slnx' \) \
+            -not -path '*/bin/*' -not -path '*/obj/*' \
+            -print -quit)
+
+          if [ -z "$solution" ]; then
+            echo "No .sln or .slnx file found. Check the repository structure."
+            exit 1
+          fi
+
+          echo "path=$solution" >> "$GITHUB_OUTPUT"
+          echo "Using solution: $solution"
+
+      - name: Restore dependencies
+        run: dotnet restore "${{ steps.solution.outputs.path }}"
+
+      - name: Build solution
+        run: dotnet build "${{ steps.solution.outputs.path }}" --configuration Release --no-restore
+
+      - name: Run automated tests
+        run: dotnet test "${{ steps.solution.outputs.path }}" --configuration Release --no-build
