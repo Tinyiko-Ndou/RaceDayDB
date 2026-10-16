@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RaceDay.API.Data;
-using RaceDay.API.Models;
 using RaceDay.API.DTOs;
+using RaceDay.API.Models;
 
 namespace RaceDay.API.Controllers
 {
@@ -16,8 +16,8 @@ namespace RaceDay.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly RaceDayDbContext _context;
-        private readonly PasswordHasher<User> _hasher = new();
         private readonly IConfiguration _configuration;
+        private readonly PasswordHasher<User> _passwordHasher = new();
 
         public AuthController(
             RaceDayDbContext context,
@@ -28,37 +28,23 @@ namespace RaceDay.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(
-            RegisterRequest request)
+        public async Task<IActionResult> Register(RegisterRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.FirstName) ||
-                string.IsNullOrWhiteSpace(request.LastName) ||
-                string.IsNullOrWhiteSpace(request.Email) ||
-                string.IsNullOrWhiteSpace(request.Password))
+            string email = request.Email.Trim().ToLowerInvariant();
+
+            if (await _context.Users.AnyAsync(u => u.Email == email))
             {
-                return BadRequest("Complete all required fields.");
+                return Conflict(new { message = "An account with this email already exists." });
             }
 
-            if (request.Password.Length < 8)
-                return BadRequest("Password must be at least 8 characters.");
+            string role = request.Role.Trim();
 
-            var role = request.Role.Trim();
-
-            if (!role.Equals("Organiser",
-                    StringComparison.OrdinalIgnoreCase) &&
-                !role.Equals("Participant",
-                    StringComparison.OrdinalIgnoreCase))
+            if (role != "Organiser" && role != "Participant")
             {
-                return BadRequest(
-                    "Role must be Organiser or Participant.");
-            }
-
-            var email = request.Email.Trim();
-
-            if (await _context.Users.AnyAsync(
-                    u => u.Email == email))
-            {
-                return Conflict("An account with this email already exists.");
+                return BadRequest(new
+                {
+                    message = "Role must be Organiser or Participant."
+                });
             }
 
             var user = new User
@@ -67,15 +53,11 @@ namespace RaceDay.API.Controllers
                 LastName = request.LastName.Trim(),
                 Email = email,
                 PhoneNumber = request.PhoneNumber,
-                Role = role.Equals(
-                    "Organiser",
-                    StringComparison.OrdinalIgnoreCase)
-                    ? "Organiser"
-                    : "Participant"
+                Role = role
             };
 
-            user.PasswordHash = _hasher.HashPassword(
-                user, request.Password);
+            user.PasswordHash =
+                _passwordHasher.HashPassword(user, request.Password);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -94,25 +76,45 @@ namespace RaceDay.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            var email = request.Email.Trim();
+            string email = request.Email.Trim().ToLowerInvariant();
 
             var user = await _context.Users
                 .SingleOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
-                return Unauthorized("Invalid email or password.");
+            {
+                return Unauthorized(new
+                {
+                    message = "Invalid email or password."
+                });
+            }
 
-            var verification = _hasher.VerifyHashedPassword(
-                user, user.PasswordHash, request.Password);
+            var verification = _passwordHasher.VerifyHashedPassword(
+                user,
+                user.PasswordHash,
+                request.Password);
 
             if (verification == PasswordVerificationResult.Failed)
-                return Unauthorized("Invalid email or password.");
+            {
+                return Unauthorized(new
+                {
+                    message = "Invalid email or password."
+                });
+            }
 
-            var key = _configuration["Jwt:Key"]!;
-            var issuer = _configuration["Jwt:Issuer"];
-            var audience = _configuration["Jwt:Audience"];
-            var expiry = int.Parse(
-                _configuration["Jwt:ExpiryMinutes"] ?? "60");
+            string? key = _configuration["Jwt:Key"];
+            string? issuer = _configuration["Jwt:Issuer"];
+            string? audience = _configuration["Jwt:Audience"];
+
+            if (string.IsNullOrWhiteSpace(key) ||
+                string.IsNullOrWhiteSpace(issuer) ||
+                string.IsNullOrWhiteSpace(audience))
+            {
+                return StatusCode(500, new
+                {
+                    message = "JWT configuration is incomplete."
+                });
+            }
 
             var claims = new[]
             {
@@ -122,28 +124,32 @@ namespace RaceDay.API.Controllers
                 new Claim(ClaimTypes.Role, user.Role)
             };
 
-            var signingKey = new SymmetricSecurityKey(
+            var securityKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(key));
 
             var credentials = new SigningCredentials(
-                signingKey, SecurityAlgorithms.HmacSha256);
+                securityKey,
+                SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
                 issuer: issuer,
                 audience: audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(expiry),
+                expires: DateTime.UtcNow.AddHours(2),
                 signingCredentials: credentials);
 
-            return Ok(new AuthResponse
+            return Ok(new
             {
-                UserID = user.UserId,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Role = user.Role,
-                Token = new JwtSecurityTokenHandler()
-                    .WriteToken(token)
+                message = "Login successful.",
+                token = new JwtSecurityTokenHandler().WriteToken(token),
+                user = new
+                {
+                    user.UserId,
+                    user.FirstName,
+                    user.LastName,
+                    user.Email,
+                    user.Role
+                }
             });
         }
     }
