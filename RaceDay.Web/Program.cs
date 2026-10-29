@@ -1,4 +1,5 @@
 using RaceDay.Web.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace RaceDay.Web
 {
@@ -24,6 +25,33 @@ namespace RaceDay.Web
 
             });
             builder.Services.AddScoped<RaceDayApiClient>();
+
+            builder.Services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.AccessDeniedPath = "/Account/AccessDenied";
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy =
+                        CookieSecurePolicy.Always;
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                });
+
+            builder.Services.AddAuthorization();
+
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                options.Cookie.SecurePolicy =
+                    CookieSecurePolicy.Always;
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -35,8 +63,10 @@ namespace RaceDay.Web
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseSession();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapStaticAssets();
