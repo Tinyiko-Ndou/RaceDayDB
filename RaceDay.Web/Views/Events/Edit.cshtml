@@ -1,0 +1,89 @@
+﻿@model RaceDay.Web.Models.EditEventViewModel
+
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<h2>Edit Event</h2>
+
+<form asp-action="Edit"
+      asp-route-id="@Model.EventID"
+      method="post">
+
+    <input type="hidden" asp-for="EventID" />
+
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="EventName"></label>
+        <input asp-for="EventName" class="form-control" />
+        <span asp-validation-for="EventName"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description"
+                  class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EventType"></label>
+        <select asp-for="EventType" class="form-select">
+            <option>Running</option>
+            <option>Walking</option>
+            <option>Cycling</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EventDate"></label>
+        <input asp-for="EventDate" type="date"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="StartTime"></label>
+        <input asp-for="StartTime" type="time"
+               class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Location"></label>
+        <input asp-for="Location" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Province"></label>
+        <input asp-for="Province" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status"></label>
+        <select asp-for="Status" class="form-select">
+            <option>Upcoming</option>
+            <option>Open</option>
+            <option>Completed</option>
+            <option>Cancelled</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Save Changes
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancel
+    </a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
