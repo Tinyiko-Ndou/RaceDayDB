@@ -2,12 +2,12 @@
 {
     public class ParticipantDashboardViewModel
     {
-        public int TotalEnrolments { get; set; }
+        public int MyEnrolments { get; set; }
 
         public int UpcomingEvents { get; set; }
 
         public int CompletedEvents { get; set; }
 
-        public int TotalResults { get; set; }
+        public int MyResults { get; set; }
     }
 }

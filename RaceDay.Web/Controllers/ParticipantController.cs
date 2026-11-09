@@ -11,54 +11,64 @@ namespace RaceDay.Web.Controllers
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public ParticipantController(IHttpClientFactory httpClientFactory)
+        public ParticipantController(
+            IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
 
-        private HttpClient CreateApiClient()
+        public async Task<IActionResult> Dashboard()
         {
-            var client = _httpClientFactory.CreateClient("RaceDayAPI");
+            var dashboard = new ParticipantDashboardViewModel();
 
             var token = HttpContext.Session.GetString("JWTToken");
 
-            if (!string.IsNullOrWhiteSpace(token))
+            if (string.IsNullOrEmpty(token))
             {
-                client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", token);
+                return RedirectToAction("Login", "Account");
             }
 
-            return client;
-        }
+            var client = _httpClientFactory.CreateClient("RaceDayAPI");
 
-        public async Task<IActionResult> Dashboard()
-        {
-            var client = CreateApiClient();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
 
+            // Retrieve all events
+            var eventResponse = await client.GetAsync("api/Event");
+
+            if (eventResponse.IsSuccessStatusCode)
+            {
+                var events = await eventResponse.Content
+                    .ReadFromJsonAsync<List<EventViewModel>>();
+
+                if (events != null)
+                {
+                    var today = DateTime.Today;
+
+                    dashboard.UpcomingEvents = events.Count(e =>
+                        e.EventDate.Date >= today);
+
+                    dashboard.CompletedEvents = events.Count(e =>
+                        e.EventDate.Date < today);
+                }
+            }
+
+            // Retrieve this participant's enrolments
             var enrolmentResponse =
                 await client.GetAsync("api/Enrolments/mine");
 
-            var enrolments = enrolmentResponse.IsSuccessStatusCode
-                ? await enrolmentResponse.Content
-                    .ReadFromJsonAsync<List<EnrolmentViewModel>>()
-                : new List<EnrolmentViewModel>();
-
-
-            enrolments ??= new List<EnrolmentViewModel>();
-
-            var model = new ParticipantDashboardViewModel
+            if (enrolmentResponse.IsSuccessStatusCode)
             {
-                TotalEnrolments = enrolments.Count,
-                UpcomingEvents = enrolments.Count(e =>
-                    e.Status.Equals("Confirmed",
-                    StringComparison.OrdinalIgnoreCase)),
-                CompletedEvents = enrolments.Count(e =>
-                    e.Status.Equals("Completed",
-                    StringComparison.OrdinalIgnoreCase)),
-                TotalResults = 0
-            };
+                var enrolments = await enrolmentResponse.Content
+                    .ReadFromJsonAsync<List<EnrolmentViewModel>>();
 
-            return View(model);
+                if (enrolments != null)
+                {
+                    dashboard.MyEnrolments = enrolments.Count;
+                }
+            }
+
+            return View(dashboard);
         }
     }
 }
