@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using RaceDay.API.Data;
+using RaceDay.API.Services;
 
 namespace RaceDay.API
 {
@@ -53,7 +54,7 @@ namespace RaceDay.API
             builder.Services.AddAuthorization();
 
 
-
+            builder.Services.AddScoped<BlobStorageService>();
 
             var app = builder.Build();
 

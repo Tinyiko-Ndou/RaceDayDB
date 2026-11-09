@@ -1,5 +1,32 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<RaceDay.Web.Models.ResultViewModel>
+
 @{
+    ViewData["Title"] = "My Results";
 }
+
+<h2>My Results</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Finish Time</th>
+            <th>Position</th>
+            <th>Pace</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var result in Model)
+        {
+            <tr>
+                <td>@result.EventName</td>
+                <td>@result.FinishTime</td>
+                <td>@result.Position</td>
+                <td>@result.Pace</td>
+                <td>@result.ResultStatus</td>
+            </tr>
+        }
+    </tbody>
+</table>

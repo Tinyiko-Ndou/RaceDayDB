@@ -1,5 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model RaceDay.Web.Models.EventViewModel
+
 @{
+    ViewData["Title"] = "Event Details";
 }
+
+<h2>@Model.EventName</h2>
+
+<div class="card">
+    <div class="card-body">
+        <p>@Model.Description</p>
+
+        <p>
+            <strong>Event type:</strong> @Model.EventType
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            @Model.EventDate.ToShortDateString()
+        </p>
+
+        <p>
+            <strong>Start time:</strong> @Model.StartTime
+        </p>
+
+        <p>
+            <strong>Location:</strong> @Model.Location
+        </p>
+
+        <p>
+            <strong>City:</strong> @Model.City
+        </p>
+
+        <p>
+            <strong>Province:</strong> @Model.Province
+        </p>
+
+        <p>
+            <strong>Status:</strong> @Model.Status
+        </p>
+
+        <form asp-controller="Enrolments"
+              asp-action="Create"
+              method="post">
+
+            <input type="hidden"
+                   name="EventID"
+                   value="@Model.EventID" />
+
+            <button type="submit"
+                    class="btn btn-success">
+                Enrol in Event
+            </button>
+        </form>
+    </div>
+</div>

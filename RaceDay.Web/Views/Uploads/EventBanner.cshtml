@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Upload Event Banner";
+}
+
+<h2>Upload Event Banner</h2>
+
+<form asp-action="EventBanner"
+      method="post"
+      enctype="multipart/form-data">
+
+    <div asp-validation-summary="All"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label for="file" class="form-label">
+            Select banner image
+        </label>
+
+        <input type="file"
+               id="file"
+               name="file"
+               class="form-control"
+               accept=".jpg,.jpeg,.png,.webp" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Upload Image
+    </button>
+</form>

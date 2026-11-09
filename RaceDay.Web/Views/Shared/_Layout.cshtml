@@ -68,3 +68,46 @@
         </a>
     </li>
 }
+@if (User.Identity?.IsAuthenticated == true &&
+     User.IsInRole("Participant"))
+{
+    <li class="nav-item">
+        <a class="nav-link"
+           asp-controller="Participant"
+           asp-action="Dashboard">
+            Dashboard
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link"
+           asp-controller="BrowseEvents"
+           asp-action="Index">
+            Browse Events
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link"
+           asp-controller="Enrolments"
+           asp-action="Mine">
+            My Enrolments
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link"
+           asp-controller="Results"
+           asp-action="Mine">
+            My Results
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link"
+           asp-controller="Profile"
+           asp-action="Index">
+            My Profile
+        </a>
+    </li>
+}

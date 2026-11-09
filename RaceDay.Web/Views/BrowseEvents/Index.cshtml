@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<RaceDay.Web.Models.EventViewModel>
+
 @{
+    ViewData["Title"] = "Browse Events";
 }
+
+<h2>Browse Events</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@item.EventName</h5>
+
+                    <p>@item.Description</p>
+
+                    <p>
+                        <strong>Type:</strong> @item.EventType
+                    </p>
+
+                    <p>
+                        <strong>Date:</strong>
+                        @item.EventDate.ToShortDateString()
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        @item.City, @item.Province
+                    </p>
+
+                    <a asp-action="Details"
+                       asp-route-id="@item.EventID"
+                       class="btn btn-primary">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
