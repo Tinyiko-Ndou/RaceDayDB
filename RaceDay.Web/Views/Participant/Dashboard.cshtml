@@ -1,7 +1,65 @@
-﻿@{
-	ViewData["Title"] = "Participant Dashboard";
+﻿@model RaceDay.Web.Models.ParticipantDashboardViewModel
+
+@{
+    ViewData["Title"] = "Participant Dashboard";
 }
-<div class="container mt-5">
-	<h1>Participant Dashboard</h1>
-	<p>Welcome to your RaceDay Participant Dashboard</p>
+
+<h2>Participant Dashboard</h2>
+
+<p>Welcome to RaceDay. Manage your events and results here.</p>
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card p-3">
+            <h5>My Enrolments</h5>
+            <h2>@Model.TotalEnrolments</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card p-3">
+            <h5>Upcoming Events</h5>
+            <h2>@Model.UpcomingEvents</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card p-3">
+            <h5>Completed Events</h5>
+            <h2>@Model.CompletedEvents</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card p-3">
+            <h5>Results</h5>
+            <h2>@Model.TotalResults</h2>
+        </div>
+    </div>
+
 </div>
+
+<a asp-controller="BrowseEvents"
+   asp-action="Index"
+   class="btn btn-primary">
+    Browse Events
+</a>
+
+<a asp-controller="Enrolments"
+   asp-action="Mine"
+   class="btn btn-success">
+    My Enrolments
+</a>
+
+<a asp-controller="Results"
+   asp-action="Mine"
+   class="btn btn-secondary">
+    My Results
+</a>
+
+<a asp-controller="Profile"
+   asp-action="Index"
+   class="btn btn-dark">
+    My Profile
+</a>
