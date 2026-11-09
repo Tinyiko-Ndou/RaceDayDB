@@ -1,8 +1,40 @@
-﻿@{
-	ViewData["Title"] = "Organiser Dashboard";
+﻿@model RaceDay.Web.Models.OrganiserDashboardViewModel
+
+@{
+    ViewData["Title"] = "Organiser Dashboard";
 }
-<div class="container mt-5">
-	<h1>Organiser Dashboard</h1>
-    <p>Welcome to your RaceDay Organiser dashboard</p>
+
+<h2>Organiser Dashboard</h2>
+
+<p>Welcome to your RaceDay organiser dashboard.</p>
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+        <div class="card p-3">
+            <h5>Total Events</h5>
+            <h2>@Model.TotalEvents</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card p-3">
+            <h5>Upcoming Events</h5>
+            <h2>@Model.UpcomingEvents</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card p-3">
+            <h5>Completed Events</h5>
+            <h2>@Model.CompletedEvents</h2>
+        </div>
+    </div>
 
 </div>
+
+<a asp-controller="Events"
+   asp-action="Index"
+   class="btn btn-primary">
+    Manage Events
+</a>
