@@ -1,5 +1,7 @@
 using RaceDay.Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Net.Http.Headers;
+
 
 namespace RaceDay.Web
 {
@@ -52,6 +54,10 @@ namespace RaceDay.Web
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 
+            builder.Services.AddHttpClient("RaceDayAPI", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7003/");
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
