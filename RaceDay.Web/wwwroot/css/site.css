@@ -29,3 +29,110 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+:root {
+    --raceday-navy: #14213d;
+    --raceday-amber: #fca311;
+    --raceday-light: #f8f9fa;
+    --raceday-dark: #343a40;
+}
+
+body {
+    background-color: var(--raceday-light);
+    color: var(--raceday-dark);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.navbar {
+    background-color: var(--raceday-navy) !important;
+}
+
+    .navbar .navbar-brand,
+    .navbar .nav-link {
+        color: white !important;
+    }
+
+        .navbar .nav-link:hover {
+            color: var(--raceday-amber) !important;
+        }
+
+.btn-primary {
+    background-color: var(--raceday-navy);
+    border-color: var(--raceday-navy);
+}
+
+    .btn-primary:hover {
+        background-color: #243b66;
+        border-color: #243b66;
+    }
+
+.btn-warning {
+    background-color: var(--raceday-amber);
+    border-color: var(--raceday-amber);
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+    color: var(--raceday-navy);
+    font-weight: bold;
+}
+
+h1, h2, h3 {
+    color: var(--raceday-navy);
+    font-weight: bold;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--raceday-amber);
+        box-shadow: 0 0 0 0.2rem rgba(252, 163, 17, 0.2);
+    }
+
+.table {
+    background-color: white;
+    border-radius: 8px;
+}
+
+footer {
+    background-color: var(--raceday-navy);
+    color: white;
+    padding: 20px;
+    position: relative;
+    height: 100px;
+    margin-top:-100px ;
+    text-align: center;
+}
+
+.dashboard-card {
+    padding: 25px;
+    min-height: 130px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .btn {
+        margin-bottom: 5px;
+    }
+}

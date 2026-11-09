@@ -22,7 +22,6 @@ C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\scopedcss\bundle\RaceDay.Web.styles.css
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\scopedcss\projectbundle\RaceDay.Web.bundle.scp.css
-C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\compressed\jnvmeyxtln-{0}-b9sayid5wm-b9sayid5wm.gz
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\compressed\67lx4z1uhj-{0}-61n19gt1b8-61n19gt1b8.gz
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\compressed\oa14bi06zv-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\compressed\fn2mwovqvu-{0}-bqjiyaj88i-bqjiyaj88i.gz
@@ -98,3 +97,4 @@ C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\RaceDay.Web.genruntimeconfig.cache
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\ref\RaceDay.Web.dll
 C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\RaceDay..034AC97B.Up2Date
+C:\Users\tinyi\OneDrive\Documents\GitHub\RaceDayDB\RaceDay.Web\obj\Debug\net10.0\compressed\jnvmeyxtln-{0}-q5v3s9dcs9-q5v3s9dcs9.gz
