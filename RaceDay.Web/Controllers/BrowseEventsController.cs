@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Json;
 using RaceDay.Web.Models;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 
 namespace RaceDay.Web.Controllers
 {
@@ -17,51 +18,33 @@ namespace RaceDay.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var client =
-                _httpClientFactory.CreateClient("RaceDayAPI");
+            var token = HttpContext.Session.GetString("JWTToken");
 
-            var response =
-                await client.GetAsync("api/Event");
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var client = _httpClientFactory.CreateClient("RaceDayAPI");
+
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await client.GetAsync("api/Event");
 
             if (!response.IsSuccessStatusCode)
             {
-                TempData["Error"] = "Unable to load events.";
+                var error = await response.Content.ReadAsStringAsync();
+
+                ViewBag.Error = error;
 
                 return View(new List<EventViewModel>());
             }
 
-            var events =
-                await response.Content
-                    .ReadFromJsonAsync<List<EventViewModel>>();
+            var events = await response.Content
+                .ReadFromJsonAsync<List<EventViewModel>>();
 
-            events ??= new List<EventViewModel>();
-
-            return View(events);
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            var client =
-                _httpClientFactory.CreateClient("RaceDayAPI");
-
-            var response =
-                await client.GetAsync($"api/Event/{id}");
-
-            if (!response.IsSuccessStatusCode)
-            {
-                return NotFound();
-            }
-
-            var eventItem =
-                await response.Content
-                    .ReadFromJsonAsync<EventViewModel>();
-
-            if (eventItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(eventItem);
+            return View(events ?? new List<EventViewModel>());
         }
     }
 }

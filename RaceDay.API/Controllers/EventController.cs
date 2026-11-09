@@ -85,7 +85,7 @@ namespace RaceDay.API.Controllers
 
         // POST: api/Event
         [HttpPost]
-        [Authorize(Roles = "Organiser")]
+        [Authorize]
         public async Task<IActionResult> CreateEvent(EventRequest request)
         {
             if (!TryGetUserId(out int userId))

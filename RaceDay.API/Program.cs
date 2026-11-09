@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using RaceDay.API.Data;
 using RaceDay.API.Services;
+using Microsoft.OpenApi;
 
 namespace RaceDay.API
 {
@@ -18,7 +19,21 @@ namespace RaceDay.API
             builder.Services.AddControllers();
             
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Description = "Paste your JWT token "
+                });
+                options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+
+                });
+            });
 
             builder.Services.AddDbContext<RaceDayDbContext>(options =>
                  options.UseSqlServer(
