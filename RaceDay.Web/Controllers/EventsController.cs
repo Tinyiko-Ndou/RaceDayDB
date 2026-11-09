@@ -67,7 +67,7 @@ namespace RaceDay.Web.Controllers
             var client = CreateApiClient();
 
             var response =
-                await client.PostAsJsonAsync("api/Event", model);
+     await client.PostAsJsonAsync("api/Event", model);
 
             if (response.IsSuccessStatusCode)
             {
@@ -75,9 +75,17 @@ namespace RaceDay.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            
+            var errorMessage =
+                await response.Content.ReadAsStringAsync();
+
+            TempData["Error"] =
+                $"API Error: {(int)response.StatusCode} " +
+                $"{response.StatusCode}. Details: {errorMessage}";
+
             ModelState.AddModelError(
                 "",
-                "The API could not create the event. Check the event details and API response."
+                TempData["Error"].ToString()!
             );
 
             return View(model);

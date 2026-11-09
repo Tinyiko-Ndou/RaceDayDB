@@ -38,10 +38,8 @@ namespace RaceDay.API.Data
                 .HasConversion<string>();
 
             modelBuilder.Entity<Event>()
-                .HasOne(e => e.Organiser)
-                .WithMany(u => u.OrganisedEvents)
-                .HasForeignKey(e => e.OrganizerID)
-                .OnDelete(DeleteBehavior.Restrict);
+                 .Property(e => e.OrganizerID)
+                 .HasColumnName("OrganiserID");
 
             modelBuilder.Entity<Event>()
                 .HasOne(e => e.Route)
